@@ -2,6 +2,10 @@
 
 ### Unreleased
 
+### 0.5.0
+
+- Add WASM support
+
 ### 0.4.1
 
 - Add `geth-compat` feature that makes keystore creation/handling

@@ -1,6 +1,6 @@
 [package]
-name = "eth-keystore"
-version = "0.4.1"
+name = "fuel-eth-keystore"
+version = "0.5.0"
 authors = ["Rohit Narurkar <rohit.narurkar@protonmail.com>"]
 edition = "2018"
 license = "Apache-2.0"
@@ -25,11 +25,14 @@ serde_json = "1.0"
 sha2 = "0.10.1"
 sha3 = "0.10.0"
 thiserror = { version = "1.0.22", default-features = false }
-uuid = { version = "0.8", features = ["serde", "v4"] }
+uuid = { version = "1.1", features = ["serde", "v4"] }
 
 # feature = "geth-compat"
 ethereum-types = { version = "0.13.1", optional = true }
 k256 = { version = "0.10.2", optional = true }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+uuid = { version = "1.1", features = ["serde", "v4", "js"] }
 
 [features]
 geth-compat = ["ethereum-types", "k256", "k256/ecdsa"]
