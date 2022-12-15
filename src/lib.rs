@@ -2,7 +2,8 @@
 //! A minimalist library to interact with encrypted JSON keystores as per the
 //! [Web3 Secret Storage Definition](https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition).
 
-use ctr::cipher::{NewCipher, StreamCipher};
+use aes::cipher::KeyIvInit;
+use ctr::cipher::StreamCipher;
 use digest::{Digest, Update};
 use hmac::Hmac;
 use pbkdf2::pbkdf2;

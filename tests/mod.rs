@@ -1,4 +1,4 @@
-use eth_keystore::{decrypt_key, encrypt_key, new};
+use fuel_eth_keystore::{decrypt_key, encrypt_key, new};
 use hex::FromHex;
 use std::path::Path;
 
@@ -9,7 +9,7 @@ mod tests {
     fn test_new() {
         let dir = Path::new("./tests/test-keys");
         let mut rng = rand::thread_rng();
-        let (secret, id) = new(&dir, &mut rng, "thebestrandompassword", None).unwrap();
+        let (secret, id) = new(dir, &mut rng, "thebestrandompassword", None).unwrap();
 
         let keypath = dir.join(&id);
 
@@ -26,9 +26,9 @@ mod tests {
         let dir = Path::new("./tests/test-keys");
         let mut rng = rand::thread_rng();
         let name = "my_keystore";
-        let (secret, _id) = new(&dir, &mut rng, "thebestrandompassword", Some(name)).unwrap();
+        let (secret, _id) = new(dir, &mut rng, "thebestrandompassword", Some(name)).unwrap();
 
-        let keypath = dir.join(&name);
+        let keypath = dir.join(name);
 
         assert_eq!(
             decrypt_key(&keypath, "thebestrandompassword").unwrap(),
@@ -66,7 +66,7 @@ mod tests {
                 .unwrap();
         let dir = Path::new("./tests/test-keys");
         let mut rng = rand::thread_rng();
-        let name = encrypt_key(&dir, &mut rng, &secret, "newpassword", None).unwrap();
+        let name = encrypt_key(dir, &mut rng, &secret, "newpassword", None).unwrap();
 
         let keypath = dir.join(&name);
         assert_eq!(decrypt_key(&keypath, "newpassword").unwrap(), secret);
